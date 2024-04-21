@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  client:
+    container_name: demo_website_client
+    restart: always
+    image: demo-client-prod
+    build:
+      context: ./frontend-server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend-server
+          target: /usr/src/client
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./frontend-server/package.json
