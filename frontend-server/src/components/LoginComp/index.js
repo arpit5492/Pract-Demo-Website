@@ -1,4 +1,19 @@
+import { useState } from "react";
+
 function Login() {
+  const [loginData, setData] = useState({
+    username: "",
+    password: ""
+  });
+
+  const handleChange = (e) => {
+    setData(prevState => {
+      return {
+        ...prevState, [e.target.name]: e.target.value
+      }
+    });
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
   }
@@ -7,16 +22,19 @@ function Login() {
     <div>
       <form action="" onSubmit={handleSubmit} style={{border: "1px solid black", height: "50vh"}}>
         <div style={{marginTop: "10%"}}>
-          <label htmlFor="">
+          <div>
+            <h5>{JSON.stringify(loginData)}</h5>
+          </div>
+          <label>
             Username
           </label>
-          <input type="text" />
+          <input type="text" onChange={handleChange} name="username"/>
         </div>
         <div>
-          <label htmlFor="">
+          <label>
             Password
           </label>
-          <input type="text" />
+          <input type="password" onChange={handleChange} name="password"/>
         </div>
         <div>
           <button>
