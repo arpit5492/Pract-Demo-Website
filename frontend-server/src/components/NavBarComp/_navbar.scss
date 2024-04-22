@@ -1,0 +1,19 @@
+.navbar {
+  margin: 0;
+  background-color: aqua;
+  ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    
+    li {
+      // display: inline-block;
+      // margin-right: 1.6em;
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: black;
+    }
+  } 
+}
