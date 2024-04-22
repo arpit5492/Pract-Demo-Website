@@ -1,6 +1,26 @@
 version: '3.8'
 
 services:
+  api:
+    container_name: demo_website_api
+    restart: always
+    image: demo-api-prod
+    build: 
+      context: ./backend-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend-server/.env
+    ports:
+      - "4000:4000"
+    develop:
+      watch:
+        - action: sync
+          path: ./backend-server
+          target: /usr/src/api
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./backend-server/package.json
   client:
     container_name: demo_website_client
     restart: always
@@ -10,6 +30,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    depends_on:
+      - api
     develop:
       watch:
         - action: sync
