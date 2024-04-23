@@ -4,6 +4,7 @@ import Login from './components/LoginComp';
 import NavBar from './components/NavBarComp';
 import HomeComp from './components/HomeComp';
 import NotFound from './components/NotFoundComp';
+import ProdDet from './components/ProdDet';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Route index element={<HomeComp />}/>
           <Route path='login' element={<Login />} />
           <Route path='*' element={<NotFound />}/>
+          <Route path='product'>
+            <Route path=':id' element={<ProdDet />}/>
+          </Route>
         </Route>
       </Routes>
     </div>

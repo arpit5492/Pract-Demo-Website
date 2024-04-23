@@ -39,12 +39,12 @@ function HomeComp() {
         {data.map(item => {
           return (
             <div className="prod-card shadow-lg" key = {item.id}>
-              <Link>
+              <Link state={item} to={`/product/${item.id}`}>
                 <div>
                   <img src={item.prod_img} alt={item.pName} />
                 </div>
               </Link>
-              <Link style={{textDecoration: "none", color: "black"}}>
+              <Link state={item} to={`/product/${item.id}`} style={{textDecoration: "none", color: "black"}}>
                 <div>
                   <h4>{item.pName}</h4>
                 </div>
