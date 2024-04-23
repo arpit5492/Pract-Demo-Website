@@ -1,6 +1,14 @@
 .prod-comp {
 
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
   .prod-card {
+
+    padding: 1em;
+
+    margin-top: 2em;
     img {
       height: 200px;
       width: 200px;

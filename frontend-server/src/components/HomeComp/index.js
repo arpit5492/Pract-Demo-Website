@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import ErrorComp from "../ErrorComp";
 import "./_home-comp.scss";
 
 function HomeComp() {
@@ -21,29 +23,38 @@ function HomeComp() {
       .catch((err) => {
         setErrFlag(true);
       })
-      console.log(data);
+      // console.log(data);
   }, []);
-  
-  return (
-    <div className="prod-comp">
-      {JSON.stringify(data)}
-      {data.map(item => {
-        return (
-          <div className="prod-card">
-            <div>
-              <img src={item.prod_img} alt={item.pName} />
+
+  if(errFlag) {
+    return (
+      <div>
+        <ErrorComp />
+      </div>
+    )
+  } else {
+    return (
+      <div className="prod-comp">
+        {/* {JSON.stringify(data)} */}
+        {data.map(item => {
+          return (
+            <div className="prod-card shadow-lg" key = {item.id}>
+              <Link>
+                <div>
+                  <img src={item.prod_img} alt={item.pName} />
+                </div>
+              </Link>
+              <Link style={{textDecoration: "none", color: "black"}}>
+                <div>
+                  <h4>{item.pName}</h4>
+                </div>
+              </Link>
             </div>
-            <div>
-              <h4>{item.pName}</h4>
-            </div>
-            <div className="price">
-              <p><span>Price: </span>${item.price}</p>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  )
+          )
+        })}
+      </div>
+    )
+  }
 }
 
 export default HomeComp;
