@@ -4,7 +4,7 @@ import "./_prodDet-comp.scss";
 function ProdDet() {
   const {id} = useParams();
   const location = useLocation();
-  console.log(id);
+  // console.log(id);
   return (
     <div className="det-comp">
       <div className="prod-det">
