@@ -1,30 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ErrorComp from "../ErrorComp";
+import prodContext from "../../store/prod-context";
 import "./_home-comp.scss";
 
 function HomeComp() {
-
-  const [data, setData] = useState([]);
-  const [errFlag, setErrFlag] = useState(false);
-
-  useEffect(() => {
-    fetch("http://localhost:4000/getProd")
-      .then(res => {
-        if(res.status === 200) {
-          return res.json();
-        } else {
-          throw new Error("Error!!");
-        }
-      })
-      .then(json => {
-        setData(json);
-      })
-      .catch((err) => {
-        setErrFlag(true);
-      })
-      // console.log(data);
-  }, []);
+  const {data, errFlag} = useContext(prodContext);
 
   if(errFlag) {
     return (
