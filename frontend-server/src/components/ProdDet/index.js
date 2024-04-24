@@ -6,8 +6,8 @@ function ProdDet() {
   const location = useLocation();
   // console.log(id);
   return (
-    <div className="det-comp">
-      <div className="prod-det">
+    <div className="det-comp mx-3">
+      <div className="prod-det shadow-lg w-25 p-3">
         <img src={location.state.prod_img} alt={location.state.pName} />
         <h4>{location.state.pName}</h4>
         <div>
