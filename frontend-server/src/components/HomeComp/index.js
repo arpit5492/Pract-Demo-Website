@@ -9,7 +9,7 @@ function HomeComp() {
   const data = useSelector(state => state.pr.products);
   const errFlag = useSelector(state => state.pr.error);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchAPI("http://localhost:4000/getProd"));
   }, [dispatch]);
