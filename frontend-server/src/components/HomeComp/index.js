@@ -2,33 +2,14 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ErrorComp from "../ErrorComp";
 import "./_home-comp.scss";
-import fetchAPI from "../../middlewares";
+import fetchAPI from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 function HomeComp() {
-  const data = useSelector(state => state.products);
-  const errFlag = useSelector(state => state.error);
+  const data = useSelector(state => state.pr.products);
+  const errFlag = useSelector(state => state.pr.error);
   const dispatch = useDispatch();
-
-  // .then() method
-  // useEffect(() => {
-  //   fetch("http://localhost:4000/getProd")
-  //     .then(singData => {
-  //       if(singData.status === 200) {
-  //         return singData.json();
-  //       } else {
-  //         throw new Error("Error!!");
-  //       }
-  //     })
-  //     .then(json => {
-  //       dispatch({type: "Fetch Products", payload: json});
-  //     })
-  //     .catch(err => {
-  //       dispatch({type: "Server Error", payload: true});
-  //     });
-  // }, []);
-
-  // async/await method
+  
   useEffect(() => {
     dispatch(fetchAPI("http://localhost:4000/getProd"));
   }, [dispatch]);
