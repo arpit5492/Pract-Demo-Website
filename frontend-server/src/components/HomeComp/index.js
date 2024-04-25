@@ -1,30 +1,13 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ErrorComp from "../ErrorComp";
 import "./_home-comp.scss";
+import { useSelector } from "react-redux";
 
 function HomeComp() {
-
-  const [data, setData] = useState([]);
-  const [errFlag, setErrFlag] = useState(false);
-
-  useEffect(() => {
-    fetch("http://localhost:4000/getProd")
-      .then(res => {
-        if(res.status === 200) {
-          return res.json();
-        } else {
-          throw new Error("Error!!");
-        }
-      })
-      .then(json => {
-        setData(json);
-      })
-      .catch((err) => {
-        setErrFlag(true);
-      })
-      // console.log(data);
-  }, []);
+  const data = useSelector(state => state.products);
+  const errFlag = useSelector(state => state.error);
+  
 
   if(errFlag) {
     return (
