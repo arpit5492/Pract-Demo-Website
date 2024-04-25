@@ -1,14 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ErrorComp from "../ErrorComp";
 import "./_home-comp.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProd, errorFlag } from "../../store/slices";
 
 function HomeComp() {
 
+  const dispatch = useDispatch();
+
   const data = useSelector(state => state.pr.products);
   const errFlag = useSelector(state => state.pr.error);
-  
+
+  useEffect(() => {
+    fetch("http://localhost:4000/getProd")
+      .then(arr => {
+        if(arr.status === 200) {
+          return arr.json();
+        } else {
+          throw new Error("Error!!");
+        }
+      })
+      .then(json => {
+        dispatch(fetchProd(json));
+      })
+      .catch(err => {
+        dispatch(errorFlag(true));
+      });
+  });
   if(errFlag) {
     return (
       <div>
