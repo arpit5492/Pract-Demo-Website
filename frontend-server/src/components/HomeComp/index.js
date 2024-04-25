@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ErrorComp from "../ErrorComp";
 import "./_home-comp.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProd, errorFlag } from "../../store/slices";
+import fetchAPI from "../../store/actions";
 
 function HomeComp() {
 
@@ -13,21 +13,9 @@ function HomeComp() {
   const errFlag = useSelector(state => state.pr.error);
 
   useEffect(() => {
-    fetch("http://localhost:4000/getProd")
-      .then(arr => {
-        if(arr.status === 200) {
-          return arr.json();
-        } else {
-          throw new Error("Error!!");
-        }
-      })
-      .then(json => {
-        dispatch(fetchProd(json));
-      })
-      .catch(err => {
-        dispatch(errorFlag(true));
-      });
-  });
+    dispatch(fetchAPI("http://localhost:4000/getProd"));
+  }, [dispatch]);
+
   if(errFlag) {
     return (
       <div>
